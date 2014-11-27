@@ -15,9 +15,9 @@ module RubyBox
       folder_by_id('0')
     end
 
-    def folder_by_id(id)
+    def folder_by_id(id, fields=nil)
       folder = Folder.new(@session, {'id' => id})
-      folder.reload_meta
+      folder.reload_meta(fields)
     end
 
     def folder(path='/')
@@ -26,9 +26,9 @@ module RubyBox
       folder_from_split_path( split_path(path) )
     end
 
-    def file_by_id(id)
+    def file_by_id(id, fields=nil)
       file = File.new(@session, {'id' => id})
-      file.reload_meta
+      file.reload_meta(fields)
     end
 
     def file(path)

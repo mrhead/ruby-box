@@ -63,8 +63,9 @@ module RubyBox
       resp = @session.delete( url )
     end
 
-    def reload_meta
+    def reload_meta(fields=nil)
       url = "#{RubyBox::API_URL}/#{resource_name}/#{@raw_item['id']}"
+      url = "#{url}?fields=#{fields.map(&:to_s).join(',')}" if fields
       @raw_item = @session.get( url )
       self
     end
@@ -175,7 +176,5 @@ module RubyBox
     def update_fields
       ['name', 'description', 'parent']
     end
-
-
   end
 end
